@@ -1,0 +1,10 @@
+{
+	"author": "Bjarne Speer",
+	"authorUrl": "https://github.com/Silt-Strider",
+	"description": "Find and replace text using regular expressions.",
+	"id": "power-of-regex",
+	"isDesktopOnly": false,
+	"minAppVersion": "0.12.17",
+	"name": "Power of RegEx",
+	"version": "2.0.0"
+}

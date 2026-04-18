@@ -1,0 +1,188 @@
+/* ── Shared layout ───────────────────────────────────────────────────────────── */
+
+.frr-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.frr-label {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+    min-width: 64px;
+    padding-right: 8px;
+    color: var(--text-muted);
+    font-size: 0.9em;
+}
+
+.frr-postfix {
+    white-space: nowrap;
+    margin-left: 6px;
+    color: var(--text-faint);
+    font-size: 0.85em;
+    font-family: var(--font-monospace);
+}
+
+/* ── Two-toggle row ──────────────────────────────────────────────────────────── */
+
+.frr-toggle-row {
+	flex-wrap: wrap;
+    gap: 6px;
+}
+
+.frr-toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+}
+
+.frr-toggle-label {
+    font-size: 0.85em;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.frr-toggle-wrap {
+    flex: 1;
+    min-width: 42px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ── Input + history dropdown ────────────────────────────────────────────────── */
+
+.frr-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+}
+
+.frr-input-wrapper input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+}
+
+.frr-history-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 5px;
+    color: var(--text-faint);
+    font-size: 0.85em;
+    line-height: 1;
+    border-radius: 3px;
+    margin-left: 2px;
+    box-shadow: none;
+}
+
+.frr-history-btn:hover {
+    color: var(--text-normal);
+    background: var(--background-modifier-hover);
+}
+
+.frr-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+    box-shadow: 0 4px 14px var(--background-modifier-box-shadow, rgba(0,0,0,0.2));
+}
+
+.frr-dropdown-item {
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.88em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--font-monospace);
+}
+
+.frr-dropdown-item:hover {
+    background: var(--background-modifier-hover);
+}
+
+.frr-dropdown-empty {
+    color: var(--text-faint);
+    cursor: default;
+    font-family: var(--font-interface);
+    font-style: italic;
+}
+
+/* ── Button row ──────────────────────────────────────────────────────────────── */
+
+.frr-btn-row {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.frr-btn-wrap {
+    flex: 1;
+    min-width: 76px;
+    display: flex;
+    justify-content: center;
+}
+
+.frr-btn-wrap button {
+    width: 100%;
+}
+
+/* ── Modal ───────────────────────────────────────────────────────────────────── */
+
+.find-replace-modal .modal-content {
+    padding-bottom: 12px;
+}
+
+/* ── Side panel view ─────────────────────────────────────────────────────────── */
+
+.find-replace-view {
+    padding: 10px 12px 14px;
+}
+
+/* ── Settings: regex quick reference table ───────────────────────────────────── */
+
+.regex-help {
+    margin: 4px 0 24px;
+}
+
+.regex-help-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88em;
+}
+
+.regex-help-table tr {
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.regex-help-table tr:last-child {
+    border-bottom: none;
+}
+
+.regex-help-table td {
+    padding: 4px 6px;
+    vertical-align: top;
+}
+
+.regex-help-pattern {
+    font-family: var(--font-monospace);
+    white-space: nowrap;
+    color: var(--text-accent);
+    width: 1%;
+    padding-right: 12px;
+}
