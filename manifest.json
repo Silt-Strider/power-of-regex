@@ -4,7 +4,7 @@
 	"description": "Find and replace text using regular expressions.",
 	"id": "power-of-regex",
 	"isDesktopOnly": false,
-	"minAppVersion": "0.12.17",
-	"name": "Power of RegEx",
-	"version": "2.0.0"
+	"minAppVersion": "1.0.0",
+	"name": "Power of RegEx search",
+	"version": "2.1.0"
 }

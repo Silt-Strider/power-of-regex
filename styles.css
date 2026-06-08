@@ -1,5 +1,8 @@
-/* ── Shared layout ───────────────────────────────────────────────────────────── */
+/* ═════════════════════════════════════════════════════════
+   LAYOUT PRIMITIVES
+   ═════════════════════════════════════════════════════════ */
 
+/* Horizontal flex container for a single labeled control row */
 .frr-row {
     display: flex;
     align-items: center;
@@ -7,6 +10,7 @@
     margin-top: 8px;
 }
 
+/* Right-aligned, fixed-width label cell — keeps all inputs flush */
 .frr-label {
     display: flex;
     justify-content: flex-end;
@@ -17,6 +21,7 @@
     font-size: 0.9em;
 }
 
+/* Trailing annotation, rendered in mono */
 .frr-postfix {
     white-space: nowrap;
     margin-left: 6px;
@@ -25,26 +30,30 @@
     font-family: var(--font-monospace);
 }
 
-/* ── Two-toggle row ──────────────────────────────────────────────────────────── */
+/* ═════════════════════════════════════════════════════════
+   TOGGLE ROW  (In selection / Wrap around)
+   ═════════════════════════════════════════════════════════ */
 
+/* Toggle groups sit side-by-side and wrap on narrow panels. */
 .frr-toggle-row {
-	flex-wrap: wrap;
+    flex-wrap: wrap;
     gap: 6px;
 }
 
+/* Each label+toggle pair */
 .frr-toggle-group {
     display: flex;
     align-items: center;
     gap: 6px;
     flex: 1;
 }
-
 .frr-toggle-label {
     font-size: 0.85em;
     color: var(--text-muted);
     white-space: nowrap;
 }
 
+/* Centers the toggle widget without letting it stretch */
 .frr-toggle-wrap {
     flex: 1;
     min-width: 42px;
@@ -52,8 +61,11 @@
     justify-content: center;
 }
 
-/* ── Input + history dropdown ────────────────────────────────────────────────── */
+/* ═════════════════════════════════════════════════════════
+   INPUT + HISTORY BUTTON
+   ═════════════════════════════════════════════════════════ */
 
+/* Relative positioning creates the stacking context for both dropdowns */
 .frr-input-wrapper {
     position: relative;
     display: flex;
@@ -62,12 +74,15 @@
     min-width: 0;
 }
 
+/* min-width: 0 lets the input shrink inside a flex container */
 .frr-input-wrapper input[type="text"] {
     flex: 1;
     min-width: 0;
     width: 100%;
+    border-radius: 2px;
 }
 
+/* history dropdown button */
 .frr-history-btn {
     flex-shrink: 0;
     background: none;
@@ -81,13 +96,18 @@
     margin-left: 2px;
     box-shadow: none;
 }
-
 .frr-history-btn:hover {
     color: var(--text-normal);
     background: var(--background-modifier-hover);
 }
 
-.frr-dropdown {
+/* ═════════════════════════════════════════════════════════
+   DROPDOWNS  (history list + path autocomplete)
+   ═════════════════════════════════════════════════════════ */
+
+/* Shared shell */
+.frr-dropdown,
+.frr-suggestions {
     display: none;
     position: absolute;
     top: calc(100% + 2px);
@@ -102,87 +122,323 @@
     box-shadow: 0 4px 14px var(--background-modifier-box-shadow, rgba(0,0,0,0.2));
 }
 
+/* Each row in the history dropdown: label + × button */
 .frr-dropdown-item {
-    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px 0 10px;
     cursor: pointer;
-    font-size: 0.88em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-family: var(--font-monospace);
+    min-height: 30px;
 }
-
 .frr-dropdown-item:hover {
     background: var(--background-modifier-hover);
 }
 
-.frr-dropdown-empty {
-    color: var(--text-faint);
-    cursor: default;
-    font-family: var(--font-interface);
-    font-style: italic;
+/* Truncates long patterns with an ellipsis; full text shown via title attr */
+.frr-dropdown-label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.88em;
+    font-family: var(--font-monospace);
+    padding: 6px 4px 6px 0;
+    cursor: pointer;
 }
 
-/* ── Button row ──────────────────────────────────────────────────────────────── */
+/* × delete button inside each history dropdown row */
+.frr-dropdown-x {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-faint);
+    font-size: 1em;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 3px;
+    box-shadow: none;
+    opacity: 0.5;
+}
+.frr-dropdown-x:hover {
+    background: var(--background-modifier-error-hover, var(--background-modifier-hover));
+    opacity: 1;
+}
 
+/* Autocomplete suggestion items */
+.frr-suggestion-item {
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 0.88em;
+    font-family: var(--font-monospace);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Keyboard-active suggestion shares the hover style */
+.frr-suggestion-item:hover,
+.frr-suggestion-active {
+    background: var(--background-modifier-hover);
+}
+
+/* ═════════════════════════════════════════════════════════
+   BUTTON ROW
+   ═════════════════════════════════════════════════════════ */
+
+/* Buttons share equal width and wrap in narrow panels. */
 .frr-btn-row {
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 14px;
 }
-
 .frr-btn-wrap {
     flex: 1;
     min-width: 76px;
     display: flex;
     justify-content: center;
 }
-
 .frr-btn-wrap button {
     width: 100%;
 }
 
-/* ── Modal ───────────────────────────────────────────────────────────────────── */
+/* ═════════════════════════════════════════════════════════
+   MISCELLANEOUS
+   ═════════════════════════════════════════════════════════ */
 
+/* Seperator line */
+.frr-section-sep,
+.frr-results-sep {
+    border: none;
+    border-top: var(--frr-sep-width, 1px) solid var(--background-modifier-border);
+    margin: var(--frr-sep-margin, 10px) 0;
+}
+
+/* ═════════════════════════════════════════════════════════
+   HOST CONTAINERS  (modal + side panel)
+   The two shells that wrap the shared UI
+   ═════════════════════════════════════════════════════════ */
+
+/* Shared title header — rendered inside content for both modal and side panel */
+.frr-match-panel-header {
+    font-size: var(--h3-size);
+    font-weight: var(--font-semibold);
+    color: var(--text-normal);
+    margin: 0 0 10px 0;
+    line-height: var(--line-height-tight);
+}
+
+/* In the modal, tighten the top gap since the native title bar is hidden */
+.find-replace-modal .frr-match-panel-header {
+    margin-top: 4px;
+}
+
+/* Extra bottom padding so the last button isn't flush with the modal edge */
 .find-replace-modal .modal-content {
     padding-bottom: 12px;
 }
 
-/* ── Side panel view ─────────────────────────────────────────────────────────── */
-
+/* Side panel fills its leaf and clips overflow so inner scrollables work */
 .find-replace-view {
-    padding: 10px 12px 14px;
+    padding: 10px 12px 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+	min-height: 96px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
-/* ── Settings: regex quick reference table ───────────────────────────────────── */
+/* ═════════════════════════════════════════════════════════
+   MATCH DISPLAY BOX
+   ═════════════════════════════════════════════════════════ */
+ 
+ /* Shows the matched text below the inputs; hidden when no match is active. */
+.frr-match-display {
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 6px 10px 8px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+}
 
+/* "found match N of M:" line above the match text */
+.frr-match-label {
+    font-size: 0.78em;
+    color: var(--text-muted);
+    margin-bottom: 2px;
+    font-family: var(--font-monospace);
+}
+
+/* Fixed height keeps layout stable as match text changes */
+.frr-match-display-text {
+    height: 52px;
+    overflow-y: auto;
+    font-family: var(--font-monospace);
+    font-size: 0.85em;
+    color: var(--text-normal);
+    word-break: break-all;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+/* Tab match box */
+.frr-tab-highlight {
+    display: inline-block;
+    min-width: 1em;
+}
+
+/* Thin vertical bar rendered as an inline widget */
+.frr-zero-match-marker {
+    display: inline-block;
+    width: 2px;
+    height: 0.75em;
+    background: var(--color-accent);
+    border-radius: 1px;
+    vertical-align: middle;
+    margin-left: 1px;
+    pointer-events: none;
+}
+
+/* Highlight around line number */
+.frr-gutter-highlight {
+    outline: 2px solid var(--color-accent);
+    border-radius: 2px;
+    margin: 0 2px 0 2px;
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+/* ═════════════════════════════════════════════════════════
+   CONFIRM MODAL  (destructive Replace-in-Files prompt)
+   ═════════════════════════════════════════════════════════ */
+
+.frr-confirm-modal.modal {
+    margin-top: 5vh;
+    align-self: flex-start;
+}
+
+.frr-confirm-msg {
+    margin-bottom: 16px;
+    color: var(--text-normal);
+    line-height: 1.5;
+    text-align: center;
+    white-space: pre-line; /* \n in the message string renders as real line breaks */
+}
+
+.frr-confirm-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+/* ═════════════════════════════════════════════════════════
+   FIND-IN-FILES RESULTS PANEL
+   ═════════════════════════════════════════════════════════ */
+
+.frr-results-wrap {
+    flex: 1;
+    min-height: 96px;
+    max-height: none;    /* override the 220 px cap when inside the side panel    */
+    overflow-y: auto;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    background: var(--background-secondary);
+}
+
+/* Cap the results list inside the popup so the modal stays scrollable */
+.find-replace-modal .frr-results-wrap {
+    flex: none;
+    max-height: 220px;
+}
+
+/* One row per matched file */
+.frr-result-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.frr-result-item:last-child {
+    border-bottom: none;
+}
+
+.frr-result-item:hover {
+    background: var(--background-modifier-hover);
+}
+
+/* Accent color signals the path is clickable (opens the file) */
+.frr-result-text {
+    font-size: 0.85em;
+    font-family: var(--font-monospace);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text-accent);
+}
+
+/* Sticky header stays visible while the file list scrolls beneath it */
+.frr-results-status {
+    display: flex;
+    align-items: center;
+    padding: 4px 4px 4px 10px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    background: var(--background-primary);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* Truncates "X / X files searched ...", when the panel is narrow */
+.frr-results-status-text {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.82em;
+    font-family: var(--font-monospace);
+    color: var(--text-muted);
+}
+
+/* ═════════════════════════════════════════════════════════
+   REGEX QUICK REFERENCE
+   ═════════════════════════════════════════════════════════ */
+
+/* Table */
 .regex-help {
     margin: 4px 0 24px;
 }
-
 .regex-help-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.88em;
 }
-
 .regex-help-table tr {
     border-bottom: 1px solid var(--background-modifier-border);
 }
-
 .regex-help-table tr:last-child {
     border-bottom: none;
 }
-
 .regex-help-table td {
     padding: 4px 6px;
     vertical-align: top;
 }
-
 .regex-help-pattern {
     font-family: var(--font-monospace);
     white-space: nowrap;
     color: var(--text-accent);
     width: 1%;
     padding-right: 12px;
+}
+
+/* Section headers ("Find Field", "Replace Field") span both columns */
+.regex-help-table td.regex-help-header {
+    font-weight: 800;
+    color: var(--text-normal);
+    padding-top: 20px;
 }
